@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:36:04 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/17 20:21:21 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:42:43 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ HumanB::HumanB( std::string name ): name(name), weapon(nullptr)
 {
 }
 
-HumanB::~HumanB( void )
+HumanB::~HumanB()
 {
 }
 
-void	HumanB::attack( void ) const
+void	HumanB::attack() const
 {
 	if (this->weapon)
 	{
-		std::cout << this->name << " attacks with their " << this->weapon->getType()
+		std::cout << this->name << " attacks with his " << this->weapon->getType()
 			<< std::endl;
 	}
 	else
@@ -35,12 +35,12 @@ void	HumanB::attack( void ) const
 	}
 }
 
-Weapon&	HumanB::getWeapon( void ) const
+Weapon&	HumanB::getWeapon() const
 {
 	return (*(this->weapon));
 }
 
-bool	HumanB::setWeapon( Weapon& newWeapon )
+bool	HumanB::setWeapon(Weapon& newWeapon)
 {
 	if (newWeapon.getType() == "")
 	{

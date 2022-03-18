@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:36:16 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/17 20:23:29 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:43:04 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ class	HumanA
 {
 	public:
 
-		HumanA( std::string name, Weapon &weapon );
-		~HumanA( void );
+		HumanA(std::string name, Weapon &weapon);
+		~HumanA();
 
-		void	attack( void ) const;
+		void	attack() const;
 
-		Weapon&	getWeapon( void ) const;
+		Weapon&	getWeapon() const;
 
 	private:
 

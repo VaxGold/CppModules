@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 19:36:09 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/18 16:44:43 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/18 17:13:57 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/18 20:02:42 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#include <iostream>
+#include "Karen.hpp"
 
-# include "Weapon.hpp"
-
-class	HumanB
+void	complain(std::string level)
 {
-	private:
-			std::string	name;
-			Weapon		*weapon;
+	Karen karen(level);
 
-	public:
-			HumanB(std::string name);
-            ~HumanB();
+	karen.complainRoutine();
+}
 
-            void	attack() const;
-
-            Weapon&	getWeapon() const;
-            bool	setWeapon(Weapon& newWeapon);
-};
-
-#endif
+int	main( int argc, char **argv )
+{
+	if (argc != 2)
+	{
+		std::cerr << "Wrong number of arguments!" << std::endl;
+		return (1);
+	}
+    Karen karen(argv[1]);
+	karen.complain();
+}

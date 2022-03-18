@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 19:36:09 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/18 16:44:43 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/18 17:12:49 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/18 17:30:45 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#include "Karen.hpp"
 
-# include "Weapon.hpp"
-
-class	HumanB
+int	main( void )
 {
-	private:
-			std::string	name;
-			Weapon		*weapon;
+	Karen karen;
 
-	public:
-			HumanB(std::string name);
-            ~HumanB();
-
-            void	attack() const;
-
-            Weapon&	getWeapon() const;
-            bool	setWeapon(Weapon& newWeapon);
-};
-
-#endif
+	karen.complain("debug");
+	karen.complain("info");
+	karen.complain("warning");
+	karen.complain("error");
+	karen.complain("something else");
+}
