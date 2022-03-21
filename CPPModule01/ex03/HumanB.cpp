@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:36:04 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/18 16:42:43 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:21:45 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	HumanB::attack() const
 {
 	if (this->weapon)
 	{
-		std::cout << this->name << " attacks with his " << this->weapon->getType()
+		std::cout << this->name << " attacks with his " << this->getWeapon().getType()
 			<< std::endl;
 	}
 	else

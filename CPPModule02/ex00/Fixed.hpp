@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 17:27:22 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/21 16:13:01 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/21 12:30:38 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/21 12:32:06 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
-Zombie::Zombie(std::string name): name(name)
-{
-}
+# include <iostream>
 
-Zombie::~Zombie()
+class Fixed
 {
-    std::cout << "Zombie " << this->getName() << " has died... AGAIN..." << std::endl;
-}
+private:
+	int value;
+	static const int bits = 8;
+public:
+	Fixed();
+	Fixed(Fixed const &other);
+	virtual ~Fixed();
 
-void    Zombie::announce(void)
-{
-    std::cout << this->getName() << " BraiiiiiiinnnzzzZ..." << std::endl;
-}
+	Fixed &operator=(Fixed const &other);
 
-std::string	Zombie::getName( void ) const
-{
-	return (this->name);
-}
+	int getRawBits(void) const;
+	void setRawBits(int const raw);
+};
+
+#endif

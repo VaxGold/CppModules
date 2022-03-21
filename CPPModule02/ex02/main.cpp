@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 17:27:22 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/21 16:13:01 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/21 12:30:19 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/21 15:32:01 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
+#include "Fixed.hpp"
 
-Zombie::Zombie(std::string name): name(name)
+int main( void )
 {
-}
+Fixed a;
+Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
-Zombie::~Zombie()
-{
-    std::cout << "Zombie " << this->getName() << " has died... AGAIN..." << std::endl;
-}
+std::cout << a << std::endl;
+std::cout << ++a << std::endl;
+std::cout << a << std::endl;
+std::cout << a++ << std::endl;
+std::cout << a << std::endl;
 
-void    Zombie::announce(void)
-{
-    std::cout << this->getName() << " BraiiiiiiinnnzzzZ..." << std::endl;
-}
+std::cout << b << std::endl;
 
-std::string	Zombie::getName( void ) const
-{
-	return (this->name);
+std::cout << Fixed::max( a, b ) << std::endl;
+return 0;
 }

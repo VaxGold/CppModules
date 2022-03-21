@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 17:27:22 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/21 16:13:01 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/21 12:30:19 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/21 12:34:09 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
+#include "Fixed.hpp"
 
-Zombie::Zombie(std::string name): name(name)
+int main( void ) 
 {
-}
-
-Zombie::~Zombie()
-{
-    std::cout << "Zombie " << this->getName() << " has died... AGAIN..." << std::endl;
-}
-
-void    Zombie::announce(void)
-{
-    std::cout << this->getName() << " BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-std::string	Zombie::getName( void ) const
-{
-	return (this->name);
+    Fixed a;
+    Fixed b( a );
+    Fixed c;
+    
+    c = b;
+    std::cout << a.getRawBits() << std::endl;
+    std::cout << b.getRawBits() << std::endl;
+    std::cout << c.getRawBits() << std::endl;
+    return 0;
 }

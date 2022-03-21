@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 17:14:16 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/18 20:16:04 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/21 10:09:41 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ public:
 
 private:
 
+	int		levelOption();
 	void	debug();
 	void	info();
 	void	warning();

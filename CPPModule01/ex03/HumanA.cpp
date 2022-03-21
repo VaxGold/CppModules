@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:35:58 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/18 16:42:23 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:20:19 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ HumanA::~HumanA()
 
 void	HumanA::attack() const
 {
-	std::cout << this->name << " attacks with his " << this->weapon.getType()
+	std::cout << this->name << " attacks with his " << this->getWeapon().getType()
 		<< std::endl;
 }
 

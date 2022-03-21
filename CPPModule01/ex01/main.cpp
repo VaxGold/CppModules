@@ -6,13 +6,13 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:27:31 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/16 19:11:47 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:18:18 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	announceAll( Zombie *zombieHorde, int N)
+void	announceAll(Zombie *zombieHorde, int N)
 {
 	for (int i = 0; i < N; i++)
 	{

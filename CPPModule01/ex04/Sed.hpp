@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Sed.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 17:27:22 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/21 16:13:01 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/21 10:24:50 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/21 16:53:03 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef SED_HPP
+# define SED_HPP
 
-Zombie::Zombie(std::string name): name(name)
-{
-}
+# include <fstream>
+# include <sstream>
+# include <iostream>
 
-Zombie::~Zombie()
+class	Sed
 {
-    std::cout << "Zombie " << this->getName() << " has died... AGAIN..." << std::endl;
-}
+	private:
+			static std::string	insertStr(std::string const &line, std::string const &haystack, std::string const &needle);
 
-void    Zombie::announce(void)
-{
-    std::cout << this->getName() << " BraiiiiiiinnnzzzZ..." << std::endl;
-}
+	public:
+			Sed();
+			~Sed();
+			
+			static void	replace(std::string const &file, std::string const &haystack, std::string const &needle);
+};
 
-std::string	Zombie::getName( void ) const
-{
-	return (this->name);
-}
+#endif

@@ -1,11 +1,11 @@
-SRCS			= main.cpp Sed.cpp
+SRCS			= main.cpp Fixed.cpp
 OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= clang++
 RM				= rm -f
 CXXFLAGS		= -Wall -Wextra -Werror -I.
 
-NAME			= sed
+NAME			= fixed
 
 all:			$(NAME)
 

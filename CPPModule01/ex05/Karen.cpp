@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 17:12:58 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/18 17:30:38 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:33:52 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	Karen::complain(std::string level)
 	};
 
 	std::string functLevel[] = {
-		"debug",
-		"info",
-		"warning",
-		"error"
+		"DEBUG",
+		"INFO",
+		"WARNING",
+		"ERROR"
 	};
 
 	for (int i = 0; i < 4; i++)
