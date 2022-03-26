@@ -19,6 +19,11 @@ int main()
     const Animal* j = new Dog();
     const Animal* i = new Cat();
     
+    Cat basic;
+    {
+	    Cat tmp = basic;
+    }
+
     delete j; 
     delete i;
 }

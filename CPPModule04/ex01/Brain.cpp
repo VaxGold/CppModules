@@ -35,7 +35,9 @@ Brain &Brain::operator=(Brain const &other)
 {
 	if (this != &other)
 	{
-		this->setIdeas(other.getIdeas());
+		for (size_t i = 0; i < 100; i++)
+			this->_ideas[i] = other._ideas[i];	
+		//this->setIdeas(other.getIdeas());
 	}
 	return (*this);
 }
