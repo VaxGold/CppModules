@@ -5,21 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 17:41:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 13:37:16 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/29 13:04:40 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/29 15:49:33 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConversion.hpp"
+#include <stdint.h>
+#include <iostream>
 
-int main (int argc, char *argv[]) 
+typedef struct	Data
 {
-	if ( argc == 2)
-	{
-		ScalarConversion example(argv[1]);
-		example.showConversions();
-	}
-	else
-		std::cout << "Error : wrong number of arguments" << std::endl;
-	return 0;
+	int a;
+}				Data;
+
+uintptr_t serialize(Data* ptr)
+{
+	return (reinterpret_cast<uintptr_t>(ptr));
+}
+
+Data* deserialize(uintptr_t raw) 
+{
+	return (reinterpret_cast<Data *>(raw));
+}
+
+int main (void)
+{
+	Data data; 
+	Data *data_b;
+
+	data.a=42;
+	uintptr_t _serialize = serialize(&data);
+	data_b = deserialize(_serialize);
+	std::cout << data_b->a << std::endl;
+	std::cout << data_b << std::endl;
+	std::cout << &data << std::endl;
+	
+	return (0);
 }

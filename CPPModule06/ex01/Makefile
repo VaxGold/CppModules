@@ -5,7 +5,7 @@ CXX				= clang++
 RM				= rm -f
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-NAME			= no_name
+NAME			= serialize
 
 all:			$(NAME)
 

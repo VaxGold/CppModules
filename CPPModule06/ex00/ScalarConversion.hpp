@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:03:59 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/28 19:15:36 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/29 15:44:50 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ class	ScalarConversion
 	private:
 			const std::string	_str;
 			ScalarConversion();
-			void displayInt();
-			void displayChar();
-			void displayFloat();
-			void displayDouble();
+			void				intConversion();
+			void				charConversion();
+			void				floatConversion();
+			void				doubleConversion();
 
 	public:
 			ScalarConversion(std::string const & str);
@@ -33,7 +33,7 @@ class	ScalarConversion
 
 			std::string const	&getString() const;
 			
-			void				display();
+			void				showConversions();
 };
 
 #endif

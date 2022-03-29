@@ -5,21 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 17:41:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 13:37:16 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/29 17:22:05 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/29 19:42:13 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConversion.hpp"
+#include "whatever.hpp"
 
-int main (int argc, char *argv[]) 
+int main( void ) 
 {
-	if ( argc == 2)
-	{
-		ScalarConversion example(argv[1]);
-		example.showConversions();
-	}
-	else
-		std::cout << "Error : wrong number of arguments" << std::endl;
-	return 0;
+    int a = 2;
+    int b = 3;
+    ::swap( a, b );
+    std::cout << "a = " << a << ", b = " << b << std::endl;
+    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+    std::string c = "chaine1";
+    std::string d = "chaine2";
+    ::swap(c, d);
+    std::cout << "c = " << c << ", d = " << d << std::endl;
+    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+    return 0;
 }

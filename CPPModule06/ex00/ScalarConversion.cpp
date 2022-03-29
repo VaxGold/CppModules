@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 19:03:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/28 20:54:02 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/29 14:56:31 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ std::string const &ScalarConversion::getString() const
 	return (this->_str);
 }
 
-void	ScalarConversion::displayInt()
+void	ScalarConversion::intConversion()
 {
 	try
 	{
 		int num;
-		num = static_cast<int>(std::stoi(this->_str));
+		num = static_cast <int> (std::stoi(this->_str));
 		std::cout << "int: " << num << std::endl; 
 	}
 	catch(std::invalid_argument&)
@@ -59,7 +59,7 @@ void	ScalarConversion::displayInt()
 	return ;
 }
 
-void	ScalarConversion::displayChar()
+void	ScalarConversion::charConversion()
 {
 	if (this->_str.length() == 1
 		&& isdigit(static_cast <int> (this->_str.c_str()[0])) ==  false )
@@ -68,10 +68,10 @@ void	ScalarConversion::displayChar()
 	{
 		try
 		{
-			int _chararcter =  static_cast<int> (std::stoi( this->_str));
+			int _chararcter =  static_cast <int> (std::stoi( this->_str));
 			
 			if (isprint(_chararcter))
-				std::cout << "char: " << "'" <<static_cast <char> (_chararcter) << "'" << std::endl;
+				std::cout << "char: " << "'" << static_cast <char> (_chararcter) << "'" << std::endl;
 			if (_chararcter <= 32 || _chararcter >= 127)
 				std::cout << "char: " << "Non displayable" << std::endl;
 		}
@@ -87,7 +87,7 @@ void	ScalarConversion::displayChar()
 	return ;
 }
 
-void	ScalarConversion::displayFloat()
+void	ScalarConversion::floatConversion()
 {
 	try
 	{
@@ -110,7 +110,7 @@ void	ScalarConversion::displayFloat()
 	}
 }
 
-void	ScalarConversion::displayDouble()
+void	ScalarConversion::doubleConversion()
 {
 	try
 	{
@@ -133,10 +133,10 @@ void	ScalarConversion::displayDouble()
 	return ;
 }
 
-void	ScalarConversion::display()
+void	ScalarConversion::showConversions()
 {
-	this->displayInt();
-	this->displayChar();
-	this->displayFloat();
-	this->displayDouble();
+	this->intConversion();
+	this->charConversion();
+	this->floatConversion();
+	this->doubleConversion();
 }

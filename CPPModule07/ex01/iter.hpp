@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 17:41:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 13:37:16 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/29 19:02:56 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/29 19:17:20 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConversion.hpp"
+#ifndef ITER_HPP
+ #define ITER_HPP
+ 
+# include <iostream>
 
-int main (int argc, char *argv[]) 
+template <typename T>
+
+void    iter(T *array, size_t len, void (*f)(T const &a))
 {
-	if ( argc == 2)
-	{
-		ScalarConversion example(argv[1]);
-		example.showConversions();
-	}
-	else
-		std::cout << "Error : wrong number of arguments" << std::endl;
-	return 0;
+    for (size_t i = 0; i < len; i++)
+        (*f)(array[i]);
 }
+
+#endif

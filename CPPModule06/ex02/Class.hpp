@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Class.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 17:41:51 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 13:37:16 by omercade         ###   ########.fr       */
+/*   Created: 2022/03/29 13:11:17 by omercade          #+#    #+#             */
+/*   Updated: 2022/03/29 15:43:46 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConversion.hpp"
+#ifndef CLASS_HPP
+#define CLASS_HPP
 
-int main (int argc, char *argv[]) 
+# include <stdlib.h>
+# include <time.h>
+
+class Base
 {
-	if ( argc == 2)
-	{
-		ScalarConversion example(argv[1]);
-		example.showConversions();
-	}
-	else
-		std::cout << "Error : wrong number of arguments" << std::endl;
-	return 0;
-}
+	public:
+		virtual	~Base() {};
+};
+
+class A : public Base{};
+class B : public Base{};
+class C : public Base{};
+
+Base *generate();
+void identify(Base *p);
+
+#endif
