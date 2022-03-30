@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:22:23 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 19:49:05 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:20:13 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ template <typename T>
 
 T const & min(T const & a, T const & b)
 {
-	return (x > y ? x : y);
+	return (a < b ? a : b);
 }
 
 template <typename T>
 
 T const & max(T const & a, T const & b)
 {
-	return (x < y ? x : y);
+	return (a > b ? a : b);
 }
 
 #endif

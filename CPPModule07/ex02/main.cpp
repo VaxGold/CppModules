@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 19:02:29 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 19:23:27 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:27:05 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,54 @@ int main(int, char**)
     delete [] mirror;//
     return 0;
 }
+
+// class Awesome 
+// {
+// public: 
+// 	Awesome( void ) : _n( 42 ) { return; } 
+// 	int get( void ) const { return this->_n; } 
+// private: 
+// 	int _n; 
+// }; 
+
+// std::ostream &operator<<( std::ostream & o, Awesome const & rhs ) { o << rhs.get(); return o; } 
+
+// int     main()
+// {
+//     Array<Awesome> complexType(20);
+    
+//     for (size_t i = 0; i < 20; i++)
+//         std::cout << "Array[" << i << "]---> " << complexType[i] << std::endl;
+
+//     std::cout << "Test#1" << std::endl;
+//     try
+//     {
+//         std::cout << complexType[20] << std::endl;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+
+//     std::cout << "Test#2" << std::endl;
+//     try
+//     {
+//         Array<Awesome> test;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+    
+//     std::cout << "Test#3" << std::endl;
+//     try
+//     {
+//         Array<Awesome> test;
+//         std::cout << test[0] << std::endl;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+
+// }

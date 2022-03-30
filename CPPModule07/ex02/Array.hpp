@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 19:02:43 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/29 19:32:08 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:27:26 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Array
 		Array() : _data(new T[0]()), _size(0) 
         {
         };
-		Array(unsigned int n) : _data(new T[n]()), _size(n)
+		Array(size_t n) : _data(new T[n]()), _size(n)
         {
         };
 		Array(const Array<T> & other)
@@ -38,20 +38,21 @@ class Array
 		{
 			delete [] this->_data;
 		};
-		Array & operator = (Array const & other)
+		Array &operator=(Array const &other)
 		{
-			if (this == other)
-				return *this;
-			this->_data = new T[other.getSize()]();
-			this->_size = other.getSize();
-			for (size_t i = 0; i < other.getSize(); i++)
-				this->_data[i] = other._data[i];
+			if (this != &other)
+			{
+				this->_data = new T[other.getSize()]();
+				this->_size = other.getSize();
+				for (size_t i = 0; i < other.getSize(); i++)
+					this->_data[i] = other._data[i];
+			}
 			return *this;
 		};
 
-		T &operator [] (unsigned int n)
+		T &operator [] (size_t n)
 		{
-			if (n > static_cast< unsigned int >(this->_size) - 1 || this->getSize() == 0)
+			if (n >= this->getSize())
 				throw ArrayGlobalException();
 			return (this->_data[n]);
 		};
@@ -66,7 +67,7 @@ class Array
 			public:
 				virtual const char * what() const throw () 
 				{
-					return "Error: arrar: ArrayGlobalException";
+					return "Error: array: ArrayGlobalException";
 				};
 		};
  
