@@ -6,15 +6,15 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 19:11:53 by omercade          #+#    #+#             */
-/*   Updated: 2022/03/30 20:13:26 by omercade         ###   ########.fr       */
+/*   Updated: 2022/03/31 12:39:24 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EASYFIND_HPP
 # define EASYFIND_HPP
 
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
 #include <exception>
 
 class EasyFindExecption : public std::exception
@@ -26,10 +26,10 @@ template <typename T>
 
 typename T::iterator easyFind(T &container , const int & n)
 {
-	typename T::iterator iter = std::find(container.begin(), container.end(), n);
-	if (iter == container.end())
+	typename T::iterator checker = std::find(container.begin(), container.end(), n);
+	if (checker == container.end())
 		throw ::EasyFindExecption();
-	return iter;
+	return (checker);
 };
 
 #endif
