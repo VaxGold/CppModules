@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:40:32 by omercade          #+#    #+#             */
-/*   Updated: 2023/03/23 20:23:53 by omercade         ###   ########.fr       */
+/*   Updated: 2023/03/24 19:40:36 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 BitcoinExchange::BitcoinExchange() { }
 
-BitcoinExchange::BitcoinExchange(FILE *file)
+BitcoinExchange::BitcoinExchange(std::string route)
 {
-    setData(file);
+    setData(route);
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &other)
 {
     *this = other;
 }
-
-BitcoinExchange::~BitcoinExchange() { }
 
 BitcoinExchange	&BitcoinExchange::operator=(BitcoinExchange const &other)
 {
@@ -35,26 +33,27 @@ BitcoinExchange	&BitcoinExchange::operator=(BitcoinExchange const &other)
     return (*this);
 }
 
-void BitcoinExchange::setData(FILE *file)
-{
-    //TODO
-    std::string tmp;
-    std::ifstream files;
-    std::string line;
-    bitxday aux;
+BitcoinExchange::~BitcoinExchange() { }
 
-    while (std::getline(files, line))
+void BitcoinExchange::setData(std::string route)
+{
+    std::ifstream file(route);
+    std::string tmp;
+    std::string line;
+    bitwallet aux;
+
+    while (std::getline(file, line))
     {
         aux = this->getRef(line);
         if (this->validDate(this->parseDate(aux.date)) == 0)
-            tmp = this->DateError(aux.date);
+            tmp = "Error: bad input => " + aux.date;
         else if (this->validValue(aux.nbc) == 0)
-            tmp = this->ValueRangeError();
+            tmp = "Error: too large number.";
         else if (this->validValue(aux.nbc) == -1)
-            tmp = this->NegativeValueError();
+            tmp = "Error: not a positive number.";
         else
             tmp = aux.date + " => " + aux.nbc + " = " + this->getValueDate(aux);
-        this->_data.push(line);
+        this->_data.push(tmp);
         tmp.clear();
         line.clear();
     }
@@ -68,6 +67,51 @@ std::queue<std::string> BitcoinExchange::getData() const
     return (this->_data);
 }
 
+bitwallet BitcoinExchange::getRef(std::string line) const
+{
+    bitwallet res;
+    res.date = "0000-00-00";
+    res.nbc = "";
+    int i = 0;
+    int aux = 0;
+
+    while (line[i] != ' ')
+        i++;
+    res.date = line.substr(0, i);
+    if (line[++i] != '|')
+        return res;
+    if (line[i] != ' ')
+        return res;
+    aux = i;
+    while (line[i] != 0)
+        i++;
+    res.nbc = line.substr(aux, line.length() - aux);
+    return res;
+}
+
+std::string BitcoinExchange::getValueDate(bitwallet ref) const
+{
+    std::ifstream file("data.csv");
+    std::string line;
+    float value = 0;
+    int i;
+
+    while (std::getline(file, line))
+    {
+        if (strcmp(ref.date.c_str(), (const char *)strtok((char *)line.c_str(), ",")) == 1)
+            break ;
+        i = 0;
+        while (line.at(i) != ',')
+            i++;
+        value = atof(line.substr(i, line.length() - i - 1).c_str());
+        if (strcmp(ref.date.c_str(), (const char *)strtok((char *)line.c_str(), ",")) == 0)
+            break ;
+        line.clear();
+    }
+    value = atof(ref.nbc.c_str()) * value;
+    return (std::to_string(value));
+}
+
 dates BitcoinExchange::parseDate(std::string date)
 {
     dates res;
@@ -78,11 +122,11 @@ dates BitcoinExchange::parseDate(std::string date)
     res.yy = 0;
     int start = 0;
     /* SPLITING STRING BY '-' */
-    for (size_t i = 0; date.at(i) != 0; i++)
+    for (size_t i = 0; i < date.length(); i++)
     {
         if (date.at(i) == '-')
         {
-            aux.push_back(date.substr(start, i));
+            aux.push_back(date.substr(start, i  - 1));
             start = i + 1;
         }
     }
@@ -98,6 +142,7 @@ dates BitcoinExchange::parseDate(std::string date)
 
 int BitcoinExchange::validDate(dates date)
 {
+    std::cout << "DAY(" << date.dd << ") MONTH(" << date.mm << ") YEAR(" << date.yy << ")" << std::endl;
     /* YEAR CHECK */
     if (date.yy < 0)
         return (0);
@@ -140,21 +185,6 @@ int BitcoinExchange::validValue(std::string value)
     else if (n > 1000)
         return (0);
     return (1);
-}
-
-std::string DateError (std::string date)
-{
-	return ("Error: bad input => " + date);
-}
-
-std::string ValueRangeError ()
-{
-	return ("Error: too large number.");
-}
-
-std::string NegativeValueError ()
-{
-	return ("Error: not a positive number.");
 }
 
 std::ostream& operator << (std::ostream &out, const BitcoinExchange &bte)

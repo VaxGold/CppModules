@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:40:41 by omercade          #+#    #+#             */
-/*   Updated: 2023/03/23 20:44:22 by omercade         ###   ########.fr       */
+/*   Updated: 2023/03/24 19:30:59 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ struct dates
 	int dd;
 };
 
-struct bitxday
+struct bitwallet
 {
 	std::string date;
 	std::string nbc;
@@ -39,25 +39,20 @@ class	BitcoinExchange
 			std::queue<std::string> _data;
 	public:
 			BitcoinExchange();
-			BitcoinExchange(FILE *file);
+			BitcoinExchange(std::string route);
 			BitcoinExchange(BitcoinExchange const &other);
 			BitcoinExchange	&operator=(BitcoinExchange const &other);
 			virtual ~BitcoinExchange();
 
-			void setData(FILE *file);
+			void setData(std::string route);
 			std::queue<std::string> getData() const;
-			bitxday getRef(std::string line) const; //TODO
-			std::string getValueDate(bitxday ref) const; //TODO
+			bitwallet getRef(std::string line) const;
+			std::string getValueDate(bitwallet ref) const;
 			
 			dates parseDate(std::string date);
 
             int validDate(dates date);
             int validValue(std::string value);
-			
-
-			std::string DateError (std::string date);
-			std::string ValueRangeError ();
-			std::string NegativeValueError ();
 };
 
 std::ostream& operator << ( std::ostream &out, const BitcoinExchange &bte);
