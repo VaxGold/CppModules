@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:40:41 by omercade          #+#    #+#             */
-/*   Updated: 2023/03/24 19:30:59 by omercade         ###   ########.fr       */
+/*   Updated: 2023/03/29 21:14:21 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,24 @@ class	BitcoinExchange
 			BitcoinExchange	&operator=(BitcoinExchange const &other);
 			virtual ~BitcoinExchange();
 
-			void setData(std::string route);
-			std::queue<std::string> getData() const;
-			bitwallet getRef(std::string line) const;
-			std::string getValueDate(bitwallet ref) const;
-			
-			dates parseDate(std::string date);
+			bitwallet getBitwallet(std::string line) const;
+			std::queue<std::string> getContainer() const;
+			std::string getTotalValue(bitwallet wallet) const;
 
-            int validDate(dates date);
-            int validValue(std::string value);
+			int is_validDate(std::string date);
+            int is_validValue(std::string value);
+			int is_validFormat(std::string line); //TODO
 };
+
+dates ft_strDate(std::string date);
 
 std::ostream& operator << ( std::ostream &out, const BitcoinExchange &bte);
 
 #endif
+
+
+/* YYYY-MM-DD => nbc = totalvalue */
+
+/* YYYY-MM-DD | nbc */
+
+/* YYYY-MM-DD,value */
