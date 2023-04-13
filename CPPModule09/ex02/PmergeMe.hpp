@@ -4,59 +4,59 @@
 # include <iostream>
 # include <cstdlib>
 # include <string>
-# include <vector>
+# include <ctime>
+
 # include <list>
 # include <deque>
+
+class SortList
+{
+	private:
+		std::list<int> _data;
+	public:
+		SortList();
+        SortList(char **data);
+		SortList(std::list<int> lst);
+		SortList(SortList const &other);
+		SortList &operator=(SortList const &other);
+		virtual ~SortList();
+
+        void sortMI();
+        void simpleSort();
+        void insert(int n);
+        void merge(SortList left, SortList right);
+
+		std::list<int> getData() const;
+};
+
+class SortDeque
+{
+	private:
+		std::deque<int> _data;
+        double _time;
+	public:
+		SortDeque();
+		SortDeque(SortDeque const &other);
+		SortDeque &operator=(SortDeque const &other);
+		virtual ~SortDeque();
+
+        void sortMI();
+        void simpleSort();
+        void insert(int n);
+        void merge(SortDeque left, SortDeque right);
+};
 
 class PmergeMe
 {
 	private:
-		PMList _list;
-		PMDeque _deque;
-		int _nelements;
-		std::vector _original;
-		std::vector _sorted;
+		double _lstTime;
+		double _dequeTime;
 	public:
 		PmergeMe();
 		PmergeMe(PmergeMe const &other);
 		PmergeMe &operator=(PmergeMe const &other);
 		virtual ~PmergeMe();
 };
-
-class SortCode
-{
-	private:
-		double _dataTime;
-		double _sortTime;
-		std::string _name;
-	public:
-		SortCode();
-		~SortCode();
-};
-
-class PMList
-{
-	private:
-		double _dataTime;
-		double _sortTime;
-	public:
-		PMList();
-		PMList(PMList const &other);
-		PMList &operator=(PMList const &other);
-		virtual ~PMList();
-};
-
-class PMDeque
-{
-	private:
-		double _dataTime;
-		double _sortTime;
-	public:
-		PMDeque();
-		PMDeque(PMDeque const &other);
-		PMDeque &operator=(PMDeque const &other);
-		virtual ~PMDeque();
-}
 
 std::ostream& operator << (std::ostream &out, const PmergeMe &obj);
 
