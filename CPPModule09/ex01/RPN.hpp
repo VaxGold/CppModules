@@ -12,21 +12,27 @@ class RPN
 {
 	private:
 		std::stack<int> _stck;
+		std::string _err;
+
+		void clearStck();
+
 	public:
 		RPN();
-		RPN(std::string str);
+		RPN(char *data);
 		RPN(RPN const &other);
 		RPN &operator=(RPN const &other);
 		virtual ~RPN();
 
-		int parse(std::vector<std::string> storage);
+		int parser(char *data);
 
-		void addition();
-		void subtraction();
-		void multiplication();
-		void division();
+		int calculator(std::string data);
+		int addition();
+		int subtraction();
+		int multiplication();
+		int division();
 
 		std::stack<int> getInfo() const;
+		std::string getError() const;
 };
 
 std::ostream& operator << (std::ostream &out, const RPN &rpn);
