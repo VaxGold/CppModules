@@ -12,7 +12,6 @@ class RPN
 {
 	private:
 		std::stack<int> _stck;
-		std::string _err;
 
 		void clearStck();
 
@@ -23,16 +22,15 @@ class RPN
 		RPN &operator=(RPN const &other);
 		virtual ~RPN();
 
-		int parser(char *data);
+		int calculator(char *data);
+		int validate(char *token);
 
-		int calculator(std::string data);
 		int addition();
 		int subtraction();
 		int multiplication();
 		int division();
 
 		std::stack<int> getInfo() const;
-		std::string getError() const;
 };
 
 std::ostream& operator << (std::ostream &out, const RPN &rpn);

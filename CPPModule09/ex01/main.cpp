@@ -8,6 +8,6 @@ int main(int narg, char **xarg)
 		return (1);
 	}
 	RPN operation(xarg[1]);
-	std::cout << operation;
+	std::cout << operation << std::endl;
 	return (0);
 }

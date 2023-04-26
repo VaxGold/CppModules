@@ -1,40 +1,20 @@
 #include "RPN.hpp"
 
-RPN::RPN(): _err("") { }
+RPN::RPN() { }
 
-RPN::RPN(char *data): _err("")
+RPN::RPN(char *data)
 {
-	// Checking correct syntaxis notation.
-	if (this->parser(data))
-	{
-		//this->_err = "Error: invalid expresion.\n";
-		this->clearStck();
-		return ;
-	}
+	char *token = std::strtok(data, " ");
 
-	// Split and operate elements.
-	std::string tmp;
-	for (size_t pos = 0; data[pos] != 0; pos++)
+	while (token != NULL)
 	{
-		while (data[pos] == ' ')
-			pos++;
-		if (data[pos] == 0)
-			break;
-		while (data[pos] != ' ')
+		if (this->calculator(token))
 		{
-			tmp += data[pos];
-			if (data[pos + 1] == 0)
-				break;
-			pos++;
-		}
-		if (this->calculator(tmp))
+			this->clearStck();
 			return ;
-		tmp.clear();
+		}
+		token = std::strtok(NULL, " ");
 	}
-
-	// Checking logic in syntaxis.
-	if (this->_stck.size() > 1)
-		this->_err = "Error: syntaxis, more than one element stored:\n";
 }
 
 RPN::RPN(RPN const &other)
@@ -47,63 +27,54 @@ RPN &RPN::operator=(RPN const &other)
 	if (this != &other)
 	{
 		this->_stck = other.getInfo();
-		this->_err = other.getError();
 	}
 	return (*this);
 }
 
 RPN::~RPN() { }
 
-int RPN::parser(char *data)
-{
-	char *token = std::strtok(data, " ");
-	int n = 0;
-	int err;
-
-	while (token != NULL)
-	{
-		err = this->validate(token);
-		if (err == 0)
-		token = std::strtok(NULL, " ");
-	}
-
-
-	return (0);
-}
-
-int RPN::calculator(std::string data)
+int RPN::calculator(char *data)
 {
 	int err = 0;
 
+	// Validate element.
+	if (this->validate(data))
+	{
+		this->clearStck();
+		return (1);
+	}
+	
 	// Choose operation.
-	if (data == "+")
+	char element = data[0];
+	if (element == '+')
 		err = this->addition();
-	else if (data == "-")
+	else if (element == '-')
 		err = this->subtraction();
-	else if (data == "*")
+	else if (element == '*')
 		err = this->multiplication();
-	else if (data == "/")
+	else if (element == '/')
 		err = this->division();
 	else
-	{
-		int n = atoi(data.c_str());
-		if (n > 9 || n < -9)
-		{
-			this->_err = "Error: number out of range.\n";
-			this->clearStck();
-			return (1);
-		}
-			this->_stck.push(atoi(data.c_str()));
-	}
+		this->_stck.push(atoi(data));
 
 	// Manage operator errors.
 	if (err != 0)
 	{
-		this->_err = "Error: operator " + data + ", not enough elements to operate.\n";
 		this->clearStck();
 		return (1);
 	}
 
+	return (0);
+}
+
+int RPN::validate(char *token)
+{
+	char c;
+	if(strlen(token) > 1)
+		return (1);
+	c = token[0];
+	if ((c < '0' || c > '9') && (c != '+' && c != '-' && c != '*' && c != '/'))
+		return (1);
 	return (0);
 }
 
@@ -171,6 +142,11 @@ int RPN::division()
 	this->_stck.pop();
 	first = this->_stck.top();
 	this->_stck.pop();
+
+	// Checking for indertemination in division.
+	if (last == 0)
+		return (1);
+
 	this->_stck.push(first / last);
 	return (0);
 }
@@ -178,11 +154,6 @@ int RPN::division()
 std::stack<int> RPN::getInfo() const
 {
 	return (this->_stck);
-}
-
-std::string RPN::getError() const
-{
-	return (this->_err);
 }
 
 void RPN::clearStck()
@@ -196,14 +167,17 @@ std::ostream& operator << (std::ostream &out, const RPN &rpn)
 {
 	std::stack<int> aux = rpn.getInfo();
 
-	out << rpn.getError();
 	if (!aux.empty())
 	{
+		if  (aux.size() > 1)
+			out << "Error";
 		while (!aux.empty())
 		{
-			out << aux.top() << std::endl;
+			out << std::endl << aux.top();
 			aux.pop();
 		}
 	}
+	else
+		out << "Error";
 	return (out);
 }
