@@ -7,7 +7,7 @@
 # include <ctime>
 
 # include <list>
-# include <deque>
+# include <vector>
 
 class SortList
 {
@@ -24,26 +24,26 @@ class SortList
         void sortMI();
         void simpleSort();
         void insert(int n);
-        void merge(SortList left, SortList right);
+        void merge(std::list<int> lst);
 
 		std::list<int> getData() const;
 };
 
-class SortDeque
+class SortVector
 {
 	private:
-		std::deque<int> _data;
+		std::vector<int> _data;
         double _time;
 	public:
-		SortDeque();
-		SortDeque(SortDeque const &other);
-		SortDeque &operator=(SortDeque const &other);
-		virtual ~SortDeque();
+		SortVector();
+		SortVector(SortVector const &other);
+		SortVector &operator=(SortVector const &other);
+		virtual ~SortVector();
 
         void sortMI();
         void simpleSort();
         void insert(int n);
-        void merge(SortDeque left, SortDeque right);
+        void merge(std::vector<int> lst);
 };
 
 class PmergeMe

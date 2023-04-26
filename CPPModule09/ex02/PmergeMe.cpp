@@ -49,7 +49,7 @@ void SortList::sortMI()
     }
     else
     {
-        int i = 0;
+        size_t i = 0;
         std::list<int>::iterator it = this->getData().begin();
         while (i < (this->getData().size() / 2))
         {
@@ -58,6 +58,7 @@ void SortList::sortMI()
         }
         SortList left(aux);
         aux.clear();
+        this->_data = left.getData();
         while (i < (this->getData().size() / 2) * 2)
         {
             aux.push_back(*it);
@@ -67,7 +68,7 @@ void SortList::sortMI()
             n = *it;
         SortList right(aux);
         aux.clear();
-        this->merge(left, right);
+        this->merge(right.getData());
         this->simpleSort();
         if (n != -1)
             this->insert(n);
@@ -91,11 +92,10 @@ void SortList::insert(int n)
     }
 }
 
-void SortList::merge(SortList left, SortList right)
+void SortList::merge(std::list<int> lst)
 {
-    this->_data.clear();
-    this->_data = left.getData();
-    this->_data.merge(right.getData());
+    for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
+        this->_data.push_back(*it);
 }
 
 std::list<int> SortList::getData() const
@@ -103,4 +103,4 @@ std::list<int> SortList::getData() const
     return (this->_data);
 }
 
-// ----> DEQUE <---- //
+// ----> VECTOR <---- //
