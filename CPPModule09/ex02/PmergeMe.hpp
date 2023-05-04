@@ -15,7 +15,7 @@ class SortList
 		std::list<int> _data;
 	public:
 		SortList();
-        SortList(char **data);
+    SortList(char **data);
 		SortList(std::list<int> lst);
 		SortList(SortList const &other);
 		SortList &operator=(SortList const &other);
