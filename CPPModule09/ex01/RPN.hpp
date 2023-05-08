@@ -4,9 +4,9 @@
 # include <cstdlib>
 # include <iostream>
 # include <string>
-# include <stack>
-# include <vector>
 # include <cctype>
+
+# include <stack>
 
 class RPN
 {
