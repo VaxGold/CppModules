@@ -1,61 +1,55 @@
 #include "PmergeMe.hpp"
 
-# include <iostream>
-# include <cstdlib>
-# include <string>
-# include <ctime>
-# include <cctype>
-# include <cstring>
-# include <chrono>
-
 int main (int narg, char **xarg)
 {
-  int n = 0;
-  for (int i = 1; i < narg; i++)
-  {
-    char *token = std::strtok(xarg[i], " ");
-  	while (token != NULL)
-  	{
-  		int len = std::strlen(token);
-      for (int j = 0; j < len; j++)
-      {
-        if (!std::isdigit(token[j]))
-        {
-          std::cout << "Error: invalid element." << std::endl;
-          return (1);
-        }
-      }
-      n++;
-      if (n > 3000)
-      {
-        std::cout << "Error: too many elements." << std::endl;
-        return (1);
-      }
-  		token = std::strtok(NULL, " ");
-  	}
-    std::cout << "Number of elements: " << n << std::endl;
-  }
+	int n = 0;
+	for (int i = 1; i < narg; i++)
+	{
+		std::istringstream tmp(xarg[i]);
+		std::string token;
+		while (tmp >> token)
+		{
+			int len = token.length();
+			for (int j = 0; j < len; j++)
+			{
+				if (!std::isdigit(token[j]))
+				{
+					std::cout << "Error: invalid element." << std::endl;
+					return (1);
+				}
+			}
+			n++;
+			if (n > 3000)
+			{
+				std::cout << "Error: too many elements." << std::endl;
+				return (1);
+			}
+			
+		}
+	}	
 
   /* LIST */
-  auto start =  std::chrono::high_resolution_clock::now();
+  std::clock_t start = std::clock();
   SortList lst(xarg);
-  auto end =  std::chrono::high_resolution_clock::now();
-  auto time_l = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+  std::clock_t end = std::clock();
+  double time_l = (double)(end - start) / (double)CLOCKS_PER_SEC * 1000000.0;
+  std::cout << lst << std::endl;
 
   /* VECTOR */
-  auto start =  std::chrono::high_resolution_clock::now();
-  SortVector vect(xarg);
-  auto end =  std::chrono::high_resolution_clock::now();
-  auto time_v = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+  start = std::clock();
+  //SortVector vect(xarg);
+  end = std::clock();
+  double time_v = (double)(end - start) / (double)CLOCKS_PER_SEC * 1000000.0;
 
   /* DISPLAY */
-  std::std::cout << "Before:";
+  std::cout << "Before:";
   for (int i = 1; i < narg; i++)
   {
-    char *token = std::strtok(xarg[i], " ");
+	char *tmp = xarg[i];
+	char *token = std::strtok(tmp, " ");
   	while (token != NULL)
   	{
-      std::std::cout << " " << token;
+		std::cout << " " << token;
   		token = std::strtok(NULL, " ");
   	}
   }
@@ -65,8 +59,8 @@ int main (int narg, char **xarg)
   // Serie ordenada
   std::cout << std::endl;
 
-  std::cout << "Time to process a range of " << n << " elements with std::list : " << time_l.count() << " us" << std::endl;
-  std::cout << "Time to process a range of " << n << " elements with std::vector : " << time_v.count() << " us" << std::endl;
+  std::cout << "Time to process a range of " << lst.getData().size() << " elements with std::list : " << time_l << " us" << std::endl;
+  std::cout << "Time to process a range of " << n << " elements with std::vector : " << time_v << " us" << std::endl;
 
   return (0);
 }
