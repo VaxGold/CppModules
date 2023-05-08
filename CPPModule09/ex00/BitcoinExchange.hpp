@@ -6,7 +6,7 @@
 /*   By: omercade <omercade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:40:41 by omercade          #+#    #+#             */
-/*   Updated: 2023/03/29 21:14:21 by omercade         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:50:39 by omercade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,32 @@
 # include <cstdlib>
 # include <string>
 # include <fstream>
+
 # include <queue>
 
-struct dates
+class Dates
 {
-	int yy;
-	int mm;
-	int dd;
+	private:
+			int yy;
+			int mm;
+			int dd;
+	public:
+			Dates();
+			Dates(std::string str);
+			Dates(Dates const &other);
+			Dates &operator=(Dates const &other);
+			virtual ~Dates();
+
+			bool operator==(Dates date) const;
+			bool operator!=(Dates date) const;
+			bool operator<(Dates date) const;
+			bool operator<=(Dates date) const;
+			bool operator>(Dates date) const;
+			bool operator>=(Dates date) const;
+
+			int getYear() const;
+			int getMonth() const;
+			int getDay() const;
 };
 
 struct bitwallet
@@ -50,10 +69,8 @@ class	BitcoinExchange
 
 			int is_validDate(std::string date);
             int is_validValue(std::string value);
-			int is_validFormat(std::string line); //TODO
+			int is_validFormat(std::string line);
 };
-
-dates ft_strDate(std::string date);
 
 std::ostream& operator << ( std::ostream &out, const BitcoinExchange &bte);
 
