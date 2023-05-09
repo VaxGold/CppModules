@@ -46,6 +46,8 @@ void SortList::sortMI()
 	std::list<int> right;
 	int n = -1;
 	size_t size = this->getData().size();
+	size_t mid_cap = size / 2;
+	size_t high_cap = size / 2 * 2;
 
 	if (size <= 3)
 		this->_data.sort();
@@ -54,9 +56,9 @@ void SortList::sortMI()
 		size_t i = 0;
 		for(std::list<int>::iterator it = this->_data.begin(); it != this->_data.end(); ++it)
 		{
-			if (i <= size / 2)
+			if (i <= mid_cap)
 				left.push_back(*it);
-			else if (i > size / 2 && i <= size / 2 * 2)
+			else if (i > mid_cap && i <= high_cap)
 				right.push_back(*it);
 			else
 				n = *it;
@@ -102,7 +104,6 @@ std::ostream& operator << (std::ostream &out, const SortList &obj)
 	out << "Sorted std::list<int>: ";
 	for(std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
 		out << *it << " ";
-	out << std::endl;
 	return out;
 }
 
@@ -208,6 +209,5 @@ std::ostream& operator << (std::ostream &out, const SortVector &obj)
 	out << "Sorted std::vector<int>: ";
 	for(std::vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
 		out << *it << " ";
-	out << std::endl;
 	return out;
 }

@@ -4,7 +4,7 @@ long long getTimeUS()
 {
 	struct timeval chrono;
 	gettimeofday(&chrono, NULL);
-	return chrono.tv_sec * 1000000LL + chrono.tv_usec;
+	return chrono.tv_sec * 1000000 + chrono.tv_usec;
 }
 
 int main (int narg, char **xarg)
@@ -31,49 +31,70 @@ int main (int narg, char **xarg)
 				std::cout << "Error: too many elements." << std::endl;
 				return (1);
 			}
-
 		}
 	}
 
-  /* LIST */
-  //std::clock_t start = std::clock();
-	long long start = getTimeUS();
-  SortList lst(xarg);
-  //std::clock_t end = std::clock();
-	long long end = getTimeUS();
-  double time_l = (double)(end - start) / (double)CLOCKS_PER_SEC * 1000000.0;
-  std::cout << lst << std::endl;
+	/* LIST */
+	long long start1 = getTimeUS();
+	SortList lst(xarg);
+	long long end1 = getTimeUS();
+	long long time_l1 = end1 - start1;
 
-  /* VECTOR */
-	start = getTimeUS();
-  //start = std::clock();
-  SortVector vect(xarg);
-	end = getTimeUS();
-  //end = std::clock();
-  double time_v = (double)(end - start) / (double)CLOCKS_PER_SEC * 1000000.0;
+	// std::clock_t start2 = std::clock();
+	// SortList lst(xarg);
+	// std::clock_t end2 = std::clock();
+	// double time_l2 = (double)(end2 - start2) / (double)CLOCKS_PER_SEC * 1000000.0;
 
-  /* DISPLAY */
-  std::cout << "Before:";
-  for (int i = 1; i < narg; i++)
-  {
-	char *tmp = xarg[i];
-	char *token = std::strtok(tmp, " ");
-  	while (token != NULL)
-  	{
-		std::cout << " " << token;
-  		token = std::strtok(NULL, " ");
-  	}
-  }
-  std::cout << std::endl;
+	// Checking duplicates.
+	std::list<int> sorted = lst.getData();
+	size_t osize = sorted.size();
+	sorted.unique();
+	if (osize != sorted.size())
+	{
+		std::cout << "Error: duplicated elements." << std::endl;
+		return (1);
+	}
 
-  std::cout << "After:" << std::endl;
-	std::cout << lst << std::endl;
-	std::cout << vect << std::endl;
-  // Serie ordenada
-  std::cout << std::endl;
 
-  std::cout << "Time to process a range of " << lst.getData().size() << " elements with std::list : " << time_l << " us" << std::endl;
-  std::cout << "Time to process a range of " << vect.getData().size() << " elements with std::vector : " << time_v << " us" << std::endl;
+	/* VECTOR */
+	start1 = getTimeUS();
+	SortVector vect(xarg);
+	end1 = getTimeUS();
+	long long time_v1 = end1 - start1;
 
-  return (0);
+	// start2 = std::clock();
+	// SortVector vect(xarg);
+	// end2 = std::clock();
+	// double time_v2 = (double)(end2 - start2) / (double)CLOCKS_PER_SEC * 1000000.0;
+
+
+	/* DISPLAY */
+	std::cout << "Before:";
+	for (int i = 1; i < narg; i++)
+	{
+		char *tmp = xarg[i];
+		char *token = std::strtok(tmp, " ");
+		while (token != NULL)
+		{
+			std::cout << " " << token;
+			token = std::strtok(NULL, " ");
+		}
+	}
+	std::cout << std::endl;
+
+	std::cout << "After: ";
+	for(std::list<int>::iterator it = sorted.begin(); it != sorted.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+	// std::cout << lst << std::endl;
+	// std::cout << vect << std::endl;
+
+	std::cout << "Time to process a range of " << lst.getData().size() << " elements with std::list : " << time_l1 << " us" << std::endl;
+	std::cout << "Time to process a range of " << vect.getData().size() << " elements with std::vector : " << time_v1 << " us" << std::endl;
+	
+	// std::cout << "Time to process a range of " << lst.getData().size() << " elements with std::list : " << time_l2 << " us" << std::endl;
+	// std::cout << "Time to process a range of " << vect.getData().size() << " elements with std::vector : " << time_v2 << " us" << std::endl;
+
+	return (0);
 }
