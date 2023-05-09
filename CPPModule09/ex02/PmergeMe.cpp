@@ -7,7 +7,7 @@ SortList::SortList() { }
 SortList::SortList(char **data)
 {
 	int i = 1;
-	
+
 	while (data[i] != 0)
 	{
 		std::istringstream tmp(data[i]);
@@ -19,7 +19,7 @@ SortList::SortList(char **data)
 	this->sortMI();
 }
 
-SortList::SortList(std::list<int> lst): _data(lst) 
+SortList::SortList(std::list<int> lst): _data(lst)
 {
 	this->sortMI();
 }
@@ -40,24 +40,23 @@ SortList &SortList::operator=(SortList const &other)
 
 SortList::~SortList() { }
 
-void SortList::sortMI() 
+void SortList::sortMI()
 {
 	std::list<int> left;
 	std::list<int> right;
 	int n = -1;
+	size_t size = this->getData().size();
 
-	// std::cout << "INSIGHT: " << *this << std::endl;
-	if (this->getData().size() <= 3)
+	if (size <= 3)
 		this->_data.sort();
 	else
 	{
 		size_t i = 0;
-		size_t size = this->getData().size();
-		for(std::list<int>::iterator it = this->getData().begin(); it != this->getData().end(); ++it)
+		for(std::list<int>::iterator it = this->_data.begin(); it != this->_data.end(); ++it)
 		{
-			if (i < size / 2)
+			if (i <= size / 2)
 				left.push_back(*it);
-			else if (i > size / 2 && i < size / 2 * 2)
+			else if (i > size / 2 && i <= size / 2 * 2)
 				right.push_back(*it);
 			else
 				n = *it;
@@ -70,68 +69,16 @@ void SortList::sortMI()
 		this->_data.sort();
 		if (n != -1)
 			this->insert(n);
-
-
-
-
-
-
-
-		// std::list<int>::iterator it = this->getData().begin();
-		// for(; it != this->getData().end(); ++it)
-		// {
-		// 	if (i < (this->getData().size() / 2))
-		// 		break;
-		// 	std::cout << "ELEMENT TO STORE: " << *it << std::endl;
-		// 	aux.push_back(*it);
-		// 	i++;
-		// }
-		// while (i < (this->getData().size() / 2))
-		// {
-		// 	std::cout << "ELEMENT TO STORE: " << *it << std::endl;
-		// 	aux.push_back(*it);
-		// 	i++;
-		// }
-		// SortList left(aux);
-		// aux.clear();
-		// this->_data = left.getData();
-		// for(; it != this->getData().end(); ++it)
-		// {
-		// 	if (i < ((this->getData().size() / 2) * 2))
-		// 		break;
-		// 	std::cout << "ELEMENT TO STORE: " << *it << std::endl;
-		// 	aux.push_back(*it);
-		// 	i++;
-		// }
-		// while (i < (this->getData().size() / 2) * 2)
-		// {
-		// 	aux.push_back(*it);
-		// 	i++;
-		// }
-		// SortList right(aux);
-		// aux.clear();
-		// this->merge(right.getData());
-		// if (it != this->getData().end())
-		// 	n = *it;
-		// this->_data.sort();
-		// if (n != -1)
-		// 	this->insert(n);
 	}
-
-	// std::list<int> lst = getData();
-	// for (std::list<int>::iterator it = lst.begin(); it != lst.end(); ++it)
-	// {
-	//     std::cout << *it << std::endl;
-	// }
 }
 
-void SortList::insert(int n) 
+void SortList::insert(int n)
 {
-	for (std::list<int>::iterator it = this->getData().begin(); it != this->getData().end(); ++it)
+	for (std::list<int>::iterator it = this->_data.begin(); it != this->_data.end(); ++it)
 	{
 		if (*it > n)
 		{
-			this->getData().insert(it, n);
+			this->_data.insert(it, n);
 			break;
 		}
 	}
@@ -160,3 +107,107 @@ std::ostream& operator << (std::ostream &out, const SortList &obj)
 }
 
 // ----> VECTOR <---- //
+
+SortVector::SortVector() { }
+
+SortVector::SortVector(char **data)
+{
+	int i = 1;
+
+	while (data[i] != 0)
+	{
+		std::istringstream tmp(data[i]);
+		std::string token;
+		while (tmp >> token)
+			this->_data.push_back(atoi(token.c_str()));
+		i++;
+	}
+	this->sortMI();
+}
+
+SortVector::SortVector(std::vector<int> vect): _data(vect)
+{
+	this->sortMI();
+}
+
+SortVector::SortVector(SortVector const &other)
+{
+	*this = other;
+}
+
+SortVector &SortVector::operator=(SortVector const &other)
+{
+	if (this != &other)
+	{
+		this->_data = other.getData();
+	}
+	return (*this);
+}
+
+SortVector::~SortVector() { }
+
+void SortVector::sortMI()
+{
+	std::vector<int> left;
+	std::vector<int> right;
+	int n = -1;
+	size_t size = this->getData().size();
+
+	if (size <= 3)
+		std::sort(this->_data.begin(), this->_data.end());
+	else
+	{
+		size_t i = 0;
+		for(std::vector<int>::iterator it = this->_data.begin(); it != this->_data.end(); ++it)
+		{
+			if (i <= size / 2)
+				left.push_back(*it);
+			else if (i > size / 2 && i <= size / 2 * 2)
+				right.push_back(*it);
+			else
+				n = *it;
+			i++;
+		}
+		SortVector vect_l(left);
+		this->_data = vect_l.getData();
+		SortVector vect_r(right);
+		this->merge(vect_r.getData());
+		std::sort(this->_data.begin(), this->_data.end());
+		if (n != -1)
+			this->insert(n);
+	}
+}
+
+void SortVector::insert(int n)
+{
+	for (std::vector<int>::iterator it = this->_data.begin(); it != this->_data.end(); ++it)
+	{
+		if (*it > n)
+		{
+			this->_data.insert(it, n);
+			break;
+		}
+	}
+}
+
+void SortVector::merge(std::vector<int> lst)
+{
+	for (std::vector<int>::iterator it = lst.begin(); it != lst.end(); ++it)
+		this->_data.push_back(*it);
+}
+
+std::vector<int> SortVector::getData() const
+{
+	return (this->_data);
+}
+
+std::ostream& operator << (std::ostream &out, const SortVector &obj)
+{
+	std::vector<int> vect = obj.getData();
+
+	out << "Sorted std::vector<int>: ";
+	for(std::vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
+		out << *it << " ";
+	out << std::endl;
+	return out;
+}

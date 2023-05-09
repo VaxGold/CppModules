@@ -8,6 +8,8 @@
 # include <cstring>
 # include <ctime>
 # include <sstream>
+# include <algorithm>
+# include <sys/time.h>
 
 # include <list>
 # include <vector>
@@ -37,14 +39,18 @@ class SortVector
 		std::vector<int> _data;
 	public:
 		SortVector();
+		SortVector(char** data);
+		SortVector(std::vector<int> vect);
 		SortVector(SortVector const &other);
 		SortVector &operator=(SortVector const &other);
 		virtual ~SortVector();
 
         void sortMI();
-        void simpleSort();
+        void sort();
         void insert(int n);
         void merge(std::vector<int> lst);
+
+		std::vector<int> getData() const;
 };
 
 // class PmergeMe
